@@ -166,7 +166,7 @@
       launched soon.
       <a
         style="text-decoration: underline"
-        href="https://docs.orbiter.finance/"
+        href="https://wp.layerx.build/introducing-layerx/layerx"
         target="__blank"
         >More</a
       >
@@ -1432,7 +1432,7 @@ export default {
       this.$refs.TipPopupRef.maskClick();
     },
     openUrl() {
-      window.open('https://www.orbiter.finance/', '_blank');
+      window.open('https://bridge.layerx.io/', '_blank');
     },
     inputTransferValue() {
       const { selectMakerConfig } = transferDataState;

@@ -173,13 +173,13 @@ export default {
         openUrl(type) {
             if (type === 1) {
                 window.open(
-                    'https://docs.orbiter.finance/makersystem',
+                    'https://wp.layerx.build/black-bridge/maker-system',
                     '_blank'
                 )
             } else if (type === 2) {
-                window.open('https://discord.com/invite/hJJvXP7C73', '_blank')
+                window.open('https://discord.com/invite/5uFSepk87z', '_blank')
             } else if (type === 99) {
-                window.open('https://testmaker.orbiter.finance/', '_blank')
+                window.open('https://testmaker.bridge.layerx.io/', '_blank')
             }
         },
         changeState(e) {

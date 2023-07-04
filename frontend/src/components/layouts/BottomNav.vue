@@ -15,9 +15,9 @@
                 </span>
             </div>
         </div>
-        <div class="terms">
+        <!-- <div class="terms">
             <span @click="openTerms">Terms of Use</span>
-        </div>
+        </div> -->
     </div>
 </template>
 
@@ -33,28 +33,28 @@ export default {
                 {
                     icon: 'docs',
                     title: 'Docs ',
-                    value: 'https://docs.layerx.bridge/',
+                    value: 'https://wp.layerx.build/introducing-layerx/layerx',
                 },
                 {
                     icon: 'github',
                     title: 'Github ',
-                    value: 'https://github.com/layerx-bridge',
+                    value: 'https://github.com/layerxdao',
                 },
                 {
                     icon: 'twitter',
                     title: 'Twitter  ',
-                    value: 'https://twitter.com/layerx_bridge',
+                    value: 'https://twitter.com/LayerX_One',
                 },
                 {
                     icon: 'medium',
                     title: 'Medium',
-                    value: 'https://layerx-bridge.medium.com/',
+                    value: 'https://medium.com/@layerxone.io/',
                 },
-                // {
-                //     icon: 'discord',
-                //     title: 'Discord',
-                //     value: 'https://discord.gg/hJJvXP7C73',
-                // },
+                {
+                    icon: 'discord',
+                    title: 'Discord',
+                    value: 'https://discord.com/invite/5uFSepk87z',
+                },
             ],
         }
     },

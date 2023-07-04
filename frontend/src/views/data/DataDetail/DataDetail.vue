@@ -85,7 +85,7 @@ export default {
       })
     },
     openTwitter() {
-      window.open('https://twitter.com/OrbiterResearch', '_blank');
+      window.open('https://twitter.com/LayerX_One', '_blank');
     }
   },
 }

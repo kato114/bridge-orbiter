@@ -5,8 +5,8 @@
        Our L2Data dashboard is temporarily offline for essential maintenance.<br>
        Apologies for any inconvenience.<br>
       For feedback or concerns, please reach out to us on
-       <span class="url" @click="openUrl('https://twitter.com/OrbiterResearch')">Twitter</span> or
-       <span class="url" @click="openUrl('http://discord.gg/hJJvXP7C73')">Discord</span>.</span>
+       <span class="url" @click="openUrl('https://twitter.com/LayerX_One')">Twitter</span> or
+       <span class="url" @click="openUrl('https://discord.com/invite/5uFSepk87z')">Discord</span>.</span>
     </div>
     <div v-if="webStatus === 1" class="l2data" >
       <Chart />
@@ -279,7 +279,7 @@ export default {
           this.tableData = [...fixList, ...rankList];
       },
       openTwitter() {
-        window.open('https://twitter.com/OrbiterResearch', '_blank');
+        window.open('https://twitter.com/LayerX_One', '_blank');
       },
     openUrl(url) {
       window.open(url, '_blank');
