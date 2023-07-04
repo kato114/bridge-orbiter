@@ -1,0 +1,106 @@
+[
+  {
+    "api": {
+      "url": "https://api-goerli.etherscan.io/api",
+      "key": ""
+    },
+    "chainId": "5",
+    "networkId": "5",
+    "internalId": "5",
+    "name": "Görli",
+    "debug": false,
+    "contracts": ["0xD9D74a29307cc6Fc8BF424ee4217f1A587FBc8Dc"],
+    "nativeCurrency": {
+      "name": "ETH",
+      "symbol": "ETH",
+      "decimals": 18,
+      "address": "0x0000000000000000000000000000000000000000"
+    },
+    "rpc": [
+      "https://goerli.infura.io/v3/9aa3d95b3bc440fa88ea12eaa4456161",
+      "https://eth-goerli.public.blastapi.io",
+      "https://rpc.ankr.com/eth_goerli",
+      "https://rpc.goerli.mudit.blog",
+      "https://eth-goerli.g.alchemy.com/v2/demo"
+    ],
+    "watch": ["rpc"],
+    "tokens": [
+      {
+        "name": "USDT",
+        "symbol": "USDT",
+        "decimals": 6,
+        "address": "0x6b56404816A1CB8ab8E8863222d8C1666De942d5"
+      },
+      {
+        "name": "USDC",
+        "symbol": "USDC",
+        "decimals": 6,
+        "address": "0x1c8f9D9C1D74c38c8Aeb5033126EA1133728b32f"
+      },
+      {
+        "name": "DAI",
+        "symbol": "DAI",
+        "decimals": 18,
+        "address": "0xFEf68eb974c562B0dCBF307d9690e0BD10e35cEa"
+      }
+    ],
+    "xvmList": ["0x2096D6DD537CF7A7ee1662BBbEc8C2809fCf2647"],
+    "faucets": ["https://goerli-faucet.slock.it/?address=${ADDRESS}", "https://faucet.goerli.mudit.blog"],
+    "infoURL": "https://goerli.net/#about"
+  },
+  {
+    "api": {
+      "url": "https://api-goerli.arbiscan.io/api",
+      "key": ""
+    },
+    "chainId": "421613",
+    "networkId": "421613",
+    "internalId": "22",
+    "name": "Arbitrum(G)",
+    "nativeCurrency": {
+      "name": "Ether",
+      "symbol": "ETH",
+      "decimals": 18,
+      "address": "0x0000000000000000000000000000000000000000"
+    },
+    "rpc": [
+      "https://goerli-rollup.arbitrum.io/rpc",
+      "https://arb-goerli.g.alchemy.com/v2/demo",
+      "https://endpoints.omniatech.io/v1/arbitrum/goerli/public"
+    ],
+    "watch": ["rpc"],
+    "contracts": ["0x1AC6a2965Bd55376ec27338F45cfBa55d8Ba380a"],
+    "tokens": [
+      {
+        "name": "USDT",
+        "symbol": "USDT",
+        "decimals": 6,
+        "address": "0x6b56404816A1CB8ab8E8863222d8C1666De942d5"
+      },
+      {
+        "name": "USDC",
+        "symbol": "USDC",
+        "decimals": 6,
+        "address": "0x1c8f9D9C1D74c38c8Aeb5033126EA1133728b32f"
+      },
+      {
+        "name": "DAI",
+        "symbol": "DAI",
+        "decimals": 18,
+        "address": "0xFEf68eb974c562B0dCBF307d9690e0BD10e35cEa"
+      }
+    ],
+    "xvmList": ["0x8D6363511418F5871107b6C2Dac78Cfb1174f3EB"],
+    "faucets": [],
+    "explorers": [
+      {
+        "name": "Arbitrum Nova Chain Explorer",
+        "url": "https://goerli-rollup.arbitrum.io/",
+        "icon": "blockscout",
+        "standard": "EIP3091"
+      }
+    ],
+    "infoURL": "https://arbitrum.io",
+    "parent": {}
+  }
+]
