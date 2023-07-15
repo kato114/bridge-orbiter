@@ -3,7 +3,7 @@
         <div class="history-page">
 
             <div class="history-content">
-                <div
+                <!-- <div
                         class="header-links-box"
                         :style="`flex-direction: ${isMobile ? 'column' : 'row'};`"
                 >
@@ -24,7 +24,7 @@
                             {{ nav }}
                         </div>
                     </template>
-                </div>
+                </div> -->
                 <div :hidden="currentNav !== 'History'">
                     <div v-if="!isMobile" class="title">History</div>
                     <!--            <div class="title" style="margin-bottom: 100px;">History</div>-->
@@ -68,7 +68,7 @@
                                 isMobile ? item.fromTimeStampShowShort : item.fromTimeStampShow
                     }}</span>
                             <span class="col-val col-3">{{
-                        item.fromAmountValue + item.fromToken
+                        item.fromAmountValue + " " + item.fromToken
                     }}</span>
                             <div
                                     class="col-val col-4"
@@ -119,7 +119,7 @@
                             iconName="close"
                     ></svg-icon>
                 </div>
-                <div :hidden="currentNav !== 'Search'" style="margin: 20px">
+                <!-- <div :hidden="currentNav !== 'Search'" style="margin: 20px">
                     <el-form
                             ref="formRef"
                             label-width="140px"
@@ -164,7 +164,7 @@
                             <span class="text">3. Your transaction <span class="bold">amount</span> is supported by LayerX Bridge.</span>
                         </div>
                     </div>
-                </div>
+                </div> -->
             </div>
         </div>
     </div>
@@ -307,45 +307,18 @@ export default {
             }
 
             this.searchLoading = true;
-            const res = await openApiAx.get(`/status?hash=${ txHash }`);
+            const res = await openApiAx.get(`/transactions/${hash}`);
             this.searchLoading = false;
             if (!res) {
                 util.showMessage("Request frequent", "error");
                 return;
             }
-            const { status, txList } = res;
-            if (status === 99) {
-                const data = {};
-                for (const tx of txList) {
-                    let decimal = 18;
-                    if (tx.symbol === 'USDC' || tx.symbol === 'USDT') {
-                        decimal = 6;
-                    }
-                    if (tx.side === 0) {
-                        const date = new Date(tx.timestamp);
-                        data.fromHash = tx.hash;
-                        data.fromChain = tx.chainId;
-                        data.fromTime = tx.timestamp;
-                        data.fromAmount = tx.value;
-                        data.fromToken = tx.symbol;
-                        data.fromTimeStampShow = util.formatDate(date);
-                        data.fromAmountValue = (new BigNumber(tx.value).dividedBy(10 ** decimal)).toFixed(8);
-                    }
-                    if (tx.side === 1) {
-                        const date = new Date(tx.timestamp);
-                        data.toHash = tx.hash;
-                        data.toChain = tx.chainId;
-                        data.toTime = tx.timestamp;
-                        data.toAmount = tx.value;
-                        data.toToken = tx.symbol;
-                        data.toTimeStampShow = util.formatDate(date);
-                        data.toAmountValue = (new BigNumber(tx.value).dividedBy(10 ** decimal)).toFixed(8);
-                    }
-                }
+            const { status, data } = res;
+            if (status == 1) {
                 this.showError = false;
                 this.getHistoryInfo(data);
             } else {
-                await openApiAx.get(`/collectUserTransactions?fromHash=${ txHash }&fromChain=${ selectChainId }`);
+                // await openApiAx.get(`/collectUserTransactions?fromHash=${ txHash }&fromChain=${ selectChainId }`);
                 this.showError = true;
             }
         },
@@ -447,7 +420,7 @@ export default {
     .history-page {
         border-radius: 20px;
         .history-content {
-            min-height: 630px;
+            // min-height: 630px;
             width: 600px;
             .table {
                 .table-header {

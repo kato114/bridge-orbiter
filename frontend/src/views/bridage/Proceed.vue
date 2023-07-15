@@ -303,19 +303,19 @@ export default {
                 ]
             }
             return [
-                {
-                    title: 'Timestamp',
-                    desc: util.transferTimeStampToTime(
-                        this.$store.state.proceeding.userTransfer.timeStamp
-                    ),
-                },
+                // {
+                //     title: 'Timestamp',
+                //     desc: util.transferTimeStampToTime(
+                //         this.$store.state.proceeding.userTransfer.timeStamp
+                //     ),
+                // },
                 {
                     title: 'Value',
                     desc:
-                        (
+                        Number((
                             this.$store.state.proceeding.userTransfer.amount /
                             10 ** selectMakerConfig.fromChain.decimals
-                        ).toFixed(6) +
+                        ).toFixed(6)) +
                         ' ' +
                         fromCurrency,
                 },
@@ -524,8 +524,9 @@ export default {
 .app {
     .proceed-box {
         width: 600px;
-        height: 568px;
+        // height: 568px;
         margin: 0 auto;
+        padding-bottom: 30px;
         .ProceedContent {
             padding: 0 40px;
             .chainDataContent {

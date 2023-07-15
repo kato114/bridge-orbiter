@@ -11,42 +11,50 @@ function confirmUserTransaction(hash) {
   let currentStatus = 1
   const cron = setInterval(async () => {
     try {
-      const { status, txList } = await openApiAx.get(`/status?hash=${hash}`)
-      util.log('txStatus', status, 'txList', txList)
-      switch (status) {
-        case 0: {
-          if (currentStatus === 2) {
-            storeUpdateProceedState(3)
-          } else {
-            const tx = txList.find((item) => item.side === 0)
-            if (tx) {
-              currentStatus = 2
-              storeUpdateProceedState(2)
-            }
-          }
-          break
-        }
-        case 1: {
-          storeUpdateProceedState(4)
-          break
-        }
-        case 99: {
-          storeUpdateProceedState(5)
-          clearInterval(cron)
-          break
+      const { status, data } = await openApiAx.get(`/transactions/${hash}`)
+      if (status == 1) {
+        if (data.toTxn != null) {
+          store.commit('updateProceedingMakerTransferTxid', data.toTxn)
+              storeUpdateProceedState(5)
+              clearInterval(cron)
         }
       }
-      for (const tx of txList) {
-        if (tx.side === 0) {
-          store.commit(
-            'updateProceedingUserTransferTimeStamp',
-            new Date(tx.timestamp).valueOf() / 1000
-          )
-        }
-        if (tx.side === 1) {
-          store.commit('updateProceedingMakerTransferTxid', tx.hash)
-        }
-      }
+
+      // util.log('txStatus', status, 'txList', txList)
+      // switch (status) {
+      //   case 0: {
+      //     if (currentStatus === 2) {
+      //       storeUpdateProceedState(3)
+      //     } else {
+      //       const tx = txList.find((item) => item.side === 0)
+      //       if (tx) {
+      //         currentStatus = 2
+      //         storeUpdateProceedState(2)
+      //       }
+      //     }
+      //     break
+      //   }
+      //   case 1: {
+      //     storeUpdateProceedState(4)
+      //     break
+      //   }
+      //   case 99: {
+      //     storeUpdateProceedState(5)
+      //     clearInterval(cron)
+      //     break
+      //   }
+      // }
+      // for (const tx of txList) {
+      //   if (tx.side === 0) {
+      //     store.commit(
+      //       'updateProceedingUserTransferTimeStamp',
+      //       new Date(tx.timestamp).valueOf() / 1000
+      //     )
+      //   }
+      //   if (tx.side === 1) {
+      //     store.commit('updateProceedingMakerTransferTxid', tx.hash)
+      //   }
+      // }
     } catch (e) {
       console.error(e)
     }

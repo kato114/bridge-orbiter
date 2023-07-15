@@ -10,7 +10,7 @@
                 @show="() => (isRaiseUpFromTokenListVisible = true)"
         ></ObSelect>
       </div>
-      <!-- <div style="flex-grow: 1;display: flex;justify-content: flex-end;align-items: center">
+      <div style="flex-grow: 1;display: flex;justify-content: flex-end;align-items: center">
         <span :style="`margin-right:10px;color:${isNewVersion ? (!isLightMode ? '#22DED7' : '#4890FE') : '#888888'}`">{{ isNewVersion ? 'V2' : 'V1' }}</span>
         <el-switch :hidden="isLightMode"
                 v-model="isNewVersion"
@@ -22,7 +22,7 @@
                 active-color="#4890FE"
                 inactive-color="#888888">
         </el-switch>
-      </div> -->
+      </div>
     </div>
     <div class="from-area">
       <div class="topItem">
@@ -404,7 +404,7 @@ export default {
   data() {
     return {
       isWhiteWallet: '',
-      isNewVersion: true,
+      isNewVersion: false,
       isLoopring: false,
 
       isCrossAddress: false,
@@ -505,7 +505,7 @@ export default {
     isLogin() {
         util.log('walletIsLogin.value',walletIsLogin.value);
         if (!walletIsLogin.value) {
-            this.isNewVersion = true;
+            this.isNewVersion = false;
             this.isWhiteWallet = false;
         } else {
             this.isWhiteWallet = !!util.isWhite();
@@ -736,7 +736,7 @@ export default {
     // },
     currentWalletAddress: function (newValue, oldValue) {
       util.log('Current wallet address', newValue);
-      this.isNewVersion = true;
+      this.isNewVersion = false;
       this.isWhiteWallet = !!util.isWhite();
       if (oldValue !== newValue && newValue !== '0x') this.updateTransferInfo();
     },
@@ -1136,7 +1136,7 @@ export default {
           info.disabled = 'disabled';
           util.log('transferValue > userMax', transferValue.toString(), userMax.toString());
         } else if (transferValue.comparedTo(makerMax) > 0) {
-          info.text = 'INSUFFICIENT LIQUIDITY';
+          info.text = 'INSUFFICIENT LIQUIDITY 1';
           info.disabled = 'disabled';
           util.log('transferValue > makerMax', transferValue.toString(), makerMax.toString());
         } else if (transferValue.comparedTo(makerMin) < 0) {
@@ -1148,7 +1148,7 @@ export default {
           info.disabled = 'disabled';
           util.log('transferValue > 0 && toValue <= 0', transferValue.toString(), this.toValue.toString());
         } else if (this.toValue > 0 && this.toValue.comparedTo(new BigNumber(this.makerMaxBalance)) > 0) {
-          info.text = 'INSUFFICIENT LIQUIDITY';
+          info.text = 'INSUFFICIENT LIQUIDITY 2';
           info.disabled = 'disabled';
           util.log('toValue > 0 && toValue > makerMaxBalance', this.toValue.toString(), new BigNumber(this.makerMaxBalance).toString());
         }
@@ -1711,6 +1711,7 @@ export default {
     ) {
       const { fromCurrency, selectMakerConfig } = transferDataState;
       const sender = selectMakerConfig.sender;
+
       try {
         if (!sender) {
           return '';

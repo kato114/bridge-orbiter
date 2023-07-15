@@ -4,7 +4,8 @@ import {
   compatibleGlobalWalletConf,
 } from './walletsResponsiveData'
 import openApiAx from '../common/openApiAx'
-import util from "../util/util";
+import util from '../util/util'
+import chainConfig from '../config'
 // import { getTransactionsHistoryApi } from '../core/routes/transactions'
 
 export const historyPanelState = reactive({
@@ -38,20 +39,38 @@ export function getTraddingHistory(isRefresh = false) {
 export function setHistoryInfo(info = {}, isShowHistory = true) {
   historyPanelState.isShowHistory = isShowHistory
   // historyPanelState.historyInfo = info
+  let token = findTokenDetail(info);
   historyPanelState.historyInfo = {
-        fromChainID: info.fromChain,
-        fromTimeStamp: info.fromTimeStampShow,
-        fromTxHash: info.fromHash,
-        makerAddress: info.replySender,
-        state: 0,
-        toChainID: info.toChain,
-        toTimeStamp: info.toTimeStampShow,
-        toTxHash: info.toHash,
-        tokenName:info.toToken,
-        userAddress: info.replyAccount,
-        userAmount: info.fromAmountValue,
+    fromChainID: info.fromChain,
+    fromTimeStamp: util.formatDate(new Date(info.startDate * 1000)),
+    fromTxHash: info.fromTxn,
+    makerAddress: info.maker,
+    state: 0,
+    toChainID: info.toChain,
+    toTimeStamp: info.endDate,
+    toTxHash: info.toTxn,
+    tokenName: token.symbol,
+    userAddress: info.sender,
+    userAmount: Number((info.fromAmount / 10 ** token.decimals).toFixed(8)),
   }
+}
 
+const findTokenDetail = (row) => {
+  for (let i = 0; i < chainConfig.chainConfig.length; i++) {    
+    let chainOne = chainConfig.chainConfig[i]
+    if (chainOne.internalId == row.fromChain) {
+      if (row.token == chainOne.nativeCurrency.address) {
+        return chainOne.nativeCurrency
+      }
+      
+      for (let j = 0; j < chainOne.tokens.length; j++) {
+        let tokenOne = chainOne.tokens[j]
+        if (tokenOne.address.toLowerCase() == row.token.toLowerCase()) {
+          return tokenOne
+        }
+      }
+    }
+  }
 }
 
 export async function getTransactionsHistory(params = {}) {
@@ -64,33 +83,35 @@ export async function getTransactionsHistory(params = {}) {
   }
   const cache = util.getCache(`history_${walletAddress}_${params.current || 1}`)
   try {
-    let res;
+    let res
     if (cache) {
-      res = cache;
+      res = cache
     } else {
       res = await openApiAx.get(
-          `/userHistory?address=${ walletAddress }&page=${ params.current || 1 }`
-      );
-      util.setCache(`history_${ walletAddress }_${ params.current || 1 }`, res, 10000);
+        `/transactions/history/${walletAddress}?page=${params.current || 1}`
+      )
+      util.setCache(
+        `history_${walletAddress}_${params.current || 1}`,
+        res,
+        10000
+      )
     }
-    const { rows, page, total } = res;
-    // const result = await openApiAx.get(`/userHistory?address=${walletAddress}`);
-    historyPanelState.transactionList = rows.map((row) => {
-      let decimal = 18
-      if (row.fromToken === 'USDC' || row.fromToken === 'USDT') {
-        decimal = 6
-      }
-      const fromDate = new Date(row.fromTime);
-      const toDate = new Date(row.toTime);
-      row.fromTimeStampShow = util.formatDate(fromDate);
-      row.toTimeStampShow = util.formatDate(toDate);
-      row.fromTimeStampShowShort = util.formatDate(fromDate, true);
-      row.toTimeStampShowShort = util.formatDate(toDate, true);
-      row.fromAmountValue = (row.fromAmount / 10 ** decimal).toFixed(8);
-      return row;
+    const { status, data, page, total } = res
+    historyPanelState.transactionList = data.map((row) => {
+      let token = findTokenDetail(row)
+      let decimal = token.decimals
+      const fromDate = new Date(row.startDate * 1000)
+      const toDate = new Date(row.endDate)
+      row.fromTimeStampShow = util.formatDate(fromDate)
+      row.toTimeStampShow = util.formatDate(toDate)
+      row.fromTimeStampShowShort = util.formatDate(fromDate, true)
+      row.toTimeStampShowShort = util.formatDate(toDate, true)
+      row.fromAmountValue = Number((row.fromAmount / 10 ** decimal).toFixed(8))
+      row.fromToken = token.symbol
+      return row
     })
     historyPanelState.transactionListInfo.current = Number(page || 1)
-    historyPanelState.transactionListInfo.total = total * 10
+    historyPanelState.transactionListInfo.total = total
     historyPanelState.isLoading = false
   } catch (error) {
     console.error(error)

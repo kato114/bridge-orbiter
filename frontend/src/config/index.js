@@ -32,6 +32,7 @@ const getTokenIcon = (token) => {
 }
 
 const makerNum = parseInt(Math.random() * 2) + 1;
+console.log("kato", makerNum)
 const maker = require(`./${ isProd() ? `maker-${ makerNum }.json` : `makerTest-${ makerNum }.json` }`);
 
 const otherNum = parseInt(Math.random() * 3) + 1;

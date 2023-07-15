@@ -29,22 +29,22 @@
         "name": "USDT",
         "symbol": "USDT",
         "decimals": 6,
-        "address": "0x6b56404816A1CB8ab8E8863222d8C1666De942d5"
+        "address": "0x07c271C9af84F3A08ea233e3F23853504Eb27A66"
       },
       {
         "name": "USDC",
         "symbol": "USDC",
         "decimals": 6,
-        "address": "0x1c8f9D9C1D74c38c8Aeb5033126EA1133728b32f"
+        "address": "0xBA4b1F004B0fA32807ED9E4dd90dD3F3Fa09eaa7"
       },
       {
         "name": "DAI",
         "symbol": "DAI",
-        "decimals": 18,
-        "address": "0xFEf68eb974c562B0dCBF307d9690e0BD10e35cEa"
+        "decimals": 6,
+        "address": "0x1Db7ad74EC813f0f4912eE343605DB633eAE2887"
       }
     ],
-    "xvmList": ["0x2096D6DD537CF7A7ee1662BBbEc8C2809fCf2647"],
+    "xvmList": ["0x652fFb189d2C289474d5c1a575741c550131f621"],
     "faucets": ["https://goerli-faucet.slock.it/?address=${ADDRESS}", "https://faucet.goerli.mudit.blog"],
     "infoURL": "https://goerli.net/#about"
   },
@@ -75,22 +75,22 @@
         "name": "USDT",
         "symbol": "USDT",
         "decimals": 6,
-        "address": "0x6b56404816A1CB8ab8E8863222d8C1666De942d5"
+        "address": "0xDc3D17217906b93aBf1be6BA6fa05bD1d9215451"
       },
       {
         "name": "USDC",
         "symbol": "USDC",
-        "decimals": 6,
-        "address": "0x1c8f9D9C1D74c38c8Aeb5033126EA1133728b32f"
+        "decimals": 18,
+        "address": "0xadf393f388BBd5EFbA07987dd734467F7c6e81f0"
       },
       {
         "name": "DAI",
         "symbol": "DAI",
-        "decimals": 18,
-        "address": "0xFEf68eb974c562B0dCBF307d9690e0BD10e35cEa"
+        "decimals": 6,
+        "address": "0x79369226fe743EC278C7169B83D2FEd7A0500642"
       }
     ],
-    "xvmList": ["0x8D6363511418F5871107b6C2Dac78Cfb1174f3EB"],
+    "xvmList": ["0x0769E9824821A21232fC6FF8b0969d2566E59632"],
     "faucets": [],
     "explorers": [
       {

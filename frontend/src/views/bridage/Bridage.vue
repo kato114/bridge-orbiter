@@ -5,7 +5,7 @@
                 v-show="!isMobile && status === '1' && !showDetail"
                 class="sub-tabs"
             >
-                <ToggleBtn @input="toggleTab" />
+                <!-- <ToggleBtn @input="toggleTab" /> -->
             </div>
             <div
                 v-show="isSenderTab && status === '1' && !showDetail"
