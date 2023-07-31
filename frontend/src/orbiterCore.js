@@ -106,6 +106,8 @@ function isLimitNumber(chain) {
 }
 
 function getToAmountFromUserAmount(userAmount, selectMakerConfig, isWei) {
+  console.log(selectMakerConfig)
+
   const decimals =
     selectMakerConfig.fromChain?.decimals || selectMakerConfig.precision
   let toAmount_tradingFee = new BigNumber(userAmount).minus(
